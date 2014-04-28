@@ -1,0 +1,34 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Added for Aakash, setting 777 permissions
+#chmod 777 /dev/ump
+#chmod 777 /dev/mali
+
+# Just to free up space
+apt-get clean
+
+# Added for Aakash, assuming the last partition will be swap in all future builds
+mkswap /dev/mmcblk0p3
+swapon /dev/mmcblk0p3
+
+#/home/aakash/github/lock_screen/lock_screen.o /dev/input/event0
+mount /dev/mmcblk0p1 /home/aakash/mount
+mount -t vfat /dev/nanda /home/aakash/nanda
+
+# Digispark autostart script
+#su aakash -c /home/aakash/digispark/gnuplot/run.sh &> /dev/null 
+
+bash /home/aakash/github/probe_tc/probe_tc.sh
+exit 0
+
