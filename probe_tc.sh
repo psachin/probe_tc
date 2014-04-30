@@ -20,7 +20,7 @@
 
 
 # Convert script.bin to script.fex
-/home/aakash/github/sunxi-tools/bin2fex /home/aakash/nanda/script.bin > /tmp/script.fex
+/opt/github/sunxi-tools/bin2fex /opt/nanda/script.bin > /tmp/script.fex
 
 # Parse Capacitive touch panel name
 TC_IN_SCRIPT_DOT_BIN=$(cat /tmp/script.fex | grep "ctp_used = 1" -A1 | grep ctp_name | sed 's/.*"\(.*\)".*/\1/g')
@@ -37,9 +37,9 @@ function ft5x() {
     then
 	echo "$(date): ${TC_IN_SCRIPT_DOT_BIN} module already loaded" >> /var/log/aakash_tc.log
     else
-	cp -v /home/aakash/mount/script.bin.ft5x /home/aakash/mount/script.bin
-	cp -v /lib/modules/uImage.3.0.76 /home/aakash/mount/uImage	
-	echo -e "8192cu\nrtl8192cu\nrtlwifi\nft5x_ts" > /etc/modules
+	cp -v /opt/mount/script.bin.ft5x /opt/mount/script.bin
+	#cp -v /lib/modules/uImage.3.0.76 /home/aakash/mount/uImage	
+	#echo -e "8192cu\nrtl8192cu\nrtlwifi\nft5x_ts" > /etc/modules
 
 	echo "$(date): Deleting xorg.conf.d" >> /var/log/aakash_tc.log
 	rm -r /usr/share/X11/xorg.conf.d
@@ -59,9 +59,9 @@ function gt811() {
     then
 	echo "$(date): ${TC_IN_SCRIPT_DOT_BIN} module already loaded" >> /var/log/aakash_tc.log
     else
-	cp -v /home/aakash/mount/script.bin.gt811 /home/aakash/mount/script.bin
-	cp -v /lib/modules/uImage.3.0.76 /home/aakash/mount/uImage	
-	echo -e "8192cu\nrtl8192cu\nrtlwifi\ngt811_ts" > /etc/modules
+	cp -v /opt/mount/script.bin.gt811 /opt/mount/script.bin
+	#cp -v /lib/modules/uImage.3.0.76 /home/aakash/mount/uImage	
+	#echo -e "8192cu\nrtl8192cu\nrtlwifi\ngt811_ts" > /etc/modules
 
 	echo "$(date): Deleting xorg.conf.d" >> /var/log/aakash_tc.log
 	rm -r /usr/share/X11/xorg.conf.d
@@ -81,9 +81,9 @@ function ektf2k() {
     then
 	echo "$(date): ${TC_IN_SCRIPT_DOT_BIN} module already loaded" >> /var/log/aakash_tc.log
     else
-	cp -v /home/aakash/mount/script.bin.ekt2k /home/aakash/mount/script.bin
-	cp -v /lib/modules/uImage.3.0.76 /home/aakash/mount/uImage
-	echo -e "8192cu\nrtl8192cu\nrtlwifi\nektf2k" > /etc/modules
+	cp -v /opt/mount/script.bin.ektf2k /opt/mount/script.bin
+	#cp -v /lib/modules/uImage.3.0.76 /home/aakash/mount/uImage
+	#echo -e "8192cu\nrtl8192cu\nrtlwifi\nektf2k" > /etc/modules
 
 	echo "$(date): Backing up xorg.conf.d" >> /var/log/aakash_tc.log
 	cp -r /usr/share/X11/xorg.conf.d /usr/share/X11/xorg.conf.d.orig
@@ -102,16 +102,16 @@ function gslx1680() {
     # Configure and load 'ektf2k' driver
     
     # Load the driver as it was compiled separately from the kernel
-    insmod /lib/modules/3.4.75+/kernel/drivers/input/touchscreen/gslx680_ts.ko
+    #insmod /lib/modules/3.4.75+/kernel/drivers/input/touchscreen/gslx680_ts.ko
     lsmod | grep "gslx680_ts"
     
     if [ "$(echo $?)" -eq 0 ];
     then
 	echo "$(date): gslx1680 module already loaded" >> /var/log/aakash_tc.log
     else
-	cp -v /home/aakash/mount/script.bin.gslx1680 /home/aakash/mount/script.bin
-	cp -v /lib/modules/uImage.3.4.75 /home/aakash/mount/uImage
-	echo -e "8192cu\nrtl8192cu\nrtlwifi\n#gslx680_ts" > /etc/modules
+	cp -v /opt/mount/script.bin.gslx1680 /opt/mount/script.bin
+	#cp -v /lib/modules/uImage.3.4.75 /home/aakash/mount/uImage
+	#echo -e "8192cu\nrtl8192cu\nrtlwifi\n#gslx680_ts" > /etc/modules
 
 	echo "$(date): Deleting xorg.conf.d" >> /var/log/aakash_tc.log
 	rm -r /usr/share/X11/xorg.conf.d
